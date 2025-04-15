@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTask } from '../hook/use-task';
 
 const todoList = [
   { id: 1, tarea: 'Comprar pan', completado: false },
@@ -10,7 +11,7 @@ const todoList = [
 
 export const TaskList = () => {
   const [todos, setTodos] = useState(todoList);
-
+  useTask();
   const handleChange = (id: number) => {
     setTodos((prev) =>
       prev.map((todo) =>
