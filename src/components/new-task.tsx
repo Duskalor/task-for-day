@@ -1,17 +1,18 @@
 import 'react-calendar/dist/Calendar.css';
-import { useState } from 'react';
 import { createPortal } from 'react-dom';
+import { useOpenTask } from '../hook/use-open-task';
 
 export const NewTask = () => {
-  const [open, setopen] = useState(false);
+  const { open, handleOpen } = useOpenTask();
+
   return (
     <div>
       <div className='flex justify-end'>
         <button
           className='mt-2 px-5 py-2 border rounded-xl cursor-pointer'
-          onClick={() => setopen((prev) => !prev)}
+          onClick={handleOpen}
         >
-          Agregar Nuevo
+          Agregar Tarea
         </button>
       </div>
 
@@ -19,7 +20,7 @@ export const NewTask = () => {
         createPortal(
           <div
             className='absolute inset-0  bg-[#F3F3F1]/70  flex justify-center items-center'
-            onClick={() => setopen((prev) => !prev)}
+            onClick={handleOpen}
           >
             <div
               onClick={(e) => e.stopPropagation()}

@@ -1,23 +1,38 @@
-import { useEffect, useState } from 'react';
-import { crudTask } from '../utils/crud-task';
+import { useEffect, useState, useTransition } from 'react';
+import { crudTask, fetchDailyTasks } from '../utils/crud-task';
 
-interface Task {
+export interface Task {
+  completed: string;
   created_at: string;
   description: string;
   id: string;
-  tarea: string;
+  name: string;
+  task_id: string;
+}
+export interface TaskResponse {
+  task_date_completed: string;
+  task_date_created_at: string;
+  task_date_id: string;
+  task_description: string;
+  task_id: string;
+  task_name: string;
 }
 
 export const useTask = () => {
-  const [task, setTask] = useState<Task[]>([]);
-
+  const [tasks, setTasks] = useState<Task[]>([]);
+  const [isPending, startTransition] = useTransition();
   useEffect(() => {
-    crudTask('task')
-      .getTasks()
-      .then((data) => setTask(data));
-
-    crudTask('task-date').getTasks().then(console.log);
+    startTransition(() => {
+      fetchDailyTasks().then(setTasks);
+    });
   }, []);
 
-  return { task };
+  const handleChange = (id: string) => {
+    startTransition(async () => {
+      await crudTask('task-date').updateTask(id);
+      fetchDailyTasks().then(setTasks);
+    });
+  };
+
+  return { tasks, handleChange, isPending };
 };
