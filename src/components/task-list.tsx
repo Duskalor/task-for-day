@@ -1,8 +1,9 @@
-import { useTask } from '../hook/use-task';
+import { useTaskLocal } from '../hook/use-task-local';
 import Loading from './loading';
-
+const isPending = false;
 export const TaskList = () => {
-  const { tasks, handleChange, isPending } = useTask();
+  // const { tasks, handleChange, isPending } = useTask();
+  const { tasks, handleChange } = useTaskLocal();
   return (
     <div className='max-w-3xl mx-auto h-full'>
       <ul>
