@@ -34,7 +34,7 @@ export const CalendarSelect = () => {
                 onClickDay={() => setopen((prev) => !prev)}
                 value={value}
                 maxDate={new Date()}
-                minDate={new Date()}
+                // minDate={new Date()}
               />
             </div>
           </div>,

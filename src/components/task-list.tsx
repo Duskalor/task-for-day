@@ -3,7 +3,9 @@ import Loading from './loading';
 const isPending = false;
 export const TaskList = () => {
   // const { tasks, handleChange, isPending } = useTask();
-  const { tasks, handleChange } = useTaskLocal();
+  const { tasks, handleChange, today } = useTaskLocal();
+
+  console.log(today);
   return (
     <div className='max-w-3xl mx-auto h-full'>
       <ul>
@@ -20,6 +22,7 @@ export const TaskList = () => {
                   className='hidden'
                   checked={Boolean(task.completed)}
                   onChange={() => handleChange(task.id)}
+                  disabled={!today}
                 />
 
                 <span
