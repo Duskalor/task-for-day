@@ -2,27 +2,7 @@ import { useState } from 'react';
 import { tasksLocal } from '../utils/crud-local-task';
 import { useCalendar } from '@context/calendar-context';
 import dayjs from 'dayjs';
-
-const ayer = dayjs().subtract(1, 'day');
-const ayer2 = dayjs().subtract(2, 'day');
-
-export const dayRouting = [
-  {
-    id: crypto.randomUUID(),
-    day: ayer.format('YYYY-MM-DD'),
-    ids_tasks: ['1', '2'],
-  },
-  {
-    id: crypto.randomUUID(),
-    day: new Date(),
-    ids_tasks: ['1'],
-  },
-  {
-    id: crypto.randomUUID(),
-    day: ayer2.format('YYYY-MM-DD'),
-    ids_tasks: ['1', '2', '3', '4'],
-  },
-];
+import { dayRouting } from '../data/day-routing';
 
 function soloFecha(date: Date) {
   return dayjs(date).format('YYYY-MM-DD');
